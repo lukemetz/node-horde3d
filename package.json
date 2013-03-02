@@ -1,0 +1,8 @@
+{
+  "name": "horde3d",
+  "version": "0.1.0",
+  "author": "Luke Metz",
+  "dependencies" : {
+    "node-glfw" : "*"
+  }
+}
