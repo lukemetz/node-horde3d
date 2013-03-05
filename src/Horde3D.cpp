@@ -28,140 +28,94 @@ using namespace v8;
 
 namespace h3d
 {
-
   JS_FUNC(getVersionString)
     JS_RETURN_STRING(h3dGetVersionString())
-
   JS_FUNC(checkExtension)
     JS_RETURN_BOOL(h3dCheckExtension(JS_ARG_STRING(0)))
-  
   JS_FUNC(getError)
     JS_RETURN_BOOL(h3dGetError())
-
   JS_FUNC(init)
     JS_RETURN_BOOL(h3dInit())
-  
   JS_FUNC(release)
     JS_RETURN_UNDF(h3dRelease())
-
   JS_FUNC(render)
     JS_RETURN_UNDF(h3dRender(JS_ARG_INT(0)))
-
   JS_FUNC(finalizeFrame)
     JS_RETURN_UNDF(h3dFinalizeFrame())
-  
   JS_FUNC(clear)
     JS_RETURN_UNDF(h3dClear())
-
   /*JS_FUNC(getMessage) */
-
   JS_FUNC(getOption)
     JS_RETURN_UNDF(h3dGetOption(static_cast<H3DOptions::List>(JS_ARG_INT(0))))
-
   JS_FUNC(setOption)
     JS_RETURN_UNDF(h3dSetOption(static_cast<H3DOptions::List>(JS_ARG_INT(0)), JS_ARG_INT(1)))
-
   JS_FUNC(getStat)
     JS_RETURN_FLOAT(h3dGetStat(static_cast<H3DStats::List>(JS_ARG_INT(0)), JS_ARG_BOOL(1)))
-
   /* JS_FUNC(showOverlays) */
   JS_FUNC(clearOverlays)
     JS_RETURN_UNDF(h3dClearOverlays())
-  
   JS_FUNC(getResName)
     JS_RETURN_STRING(h3dGetResName(JS_ARG_INT(0)))
-
   JS_FUNC(getNextResource)
     JS_RETURN_INT(h3dGetNextResource(JS_ARG_INT(0), JS_ARG_INT(1)))
-
   JS_FUNC(findResource)
     JS_RETURN_INT(h3dFindResource(JS_ARG_INT(0), JS_ARG_STRING(1)))
-  
   JS_FUNC(addResource)
     JS_RETURN_INT(h3dAddResource(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(2)))
-  
   JS_FUNC(cloneResource)
     JS_RETURN_INT(h3dCloneResource(JS_ARG_INT(0), JS_ARG_STRING(1)))
-  
   JS_FUNC(removeResource)
     JS_RETURN_INT(h3dRemoveResource(JS_ARG_INT(0)))
-
   JS_FUNC(isResLoaded)
     JS_RETURN_INT(h3dIsResLoaded(JS_ARG_INT(0)))
-
   JS_FUNC(loadResource)
     JS_RETURN_BOOL(h3dLoadResource(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(2)))
-
   JS_FUNC(unloadResource)
     JS_RETURN_UNDF(h3dUnloadResource(JS_ARG_INT(0)))
-
   JS_FUNC(getResElemCount)
     JS_RETURN_INT(h3dGetResElemCount(JS_ARG_INT(0), JS_ARG_INT(1)))
-
   JS_FUNC(findResElem)
     JS_RETURN_INT(h3dFindResElem(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_STRING(3)))
-
   JS_FUNC(getResParamI)
     JS_RETURN_INT(h3dGetResParamI(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_INT(3)))
-  
   JS_FUNC(setResParamI)
     JS_RETURN_UNDF(h3dSetResParamI(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_INT(3), JS_ARG_INT(4)))
-
   JS_FUNC(getResParamF)
     JS_RETURN_FLOAT(h3dGetResParamF(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_INT(3), JS_ARG_INT(4)))
-  
   JS_FUNC(setResParamF)
     JS_RETURN_UNDF(h3dSetResParamF(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_INT(3), JS_ARG_INT(4), JS_ARG_FLOAT(5)))
-
   JS_FUNC(getResParamStr)
     JS_RETURN_STRING(h3dGetResParamStr(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_INT(3)))
-
   JS_FUNC(setResParamStr)
     JS_RETURN_UNDF(h3dSetResParamStr(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_INT(3), JS_ARG_STRING(4)))
-
   /* JS_FUNC(mapResStream) */
   /* JS_FUNC(unmapResStream) */
-
   JS_FUNC(queryUnloadedResource)
     JS_RETURN_INT(h3dQueryUnloadedResource(JS_ARG_INT(0)))
-
   JS_FUNC(createTexture)
     JS_RETURN_INT(h3dCreateTexture(JS_ARG_STRING(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_INT(3), JS_ARG_INT(4)))
-  
   JS_FUNC(setShaderPreambles)
     JS_RETURN_UNDF(h3dSetShaderPreambles(JS_ARG_STRING(0), JS_ARG_STRING(1)))
-
   JS_FUNC(setMaterialUniform)
     JS_RETURN_BOOL(h3dSetMaterialUniform(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_FLOAT(2), JS_ARG_FLOAT(3), JS_ARG_FLOAT(4), JS_ARG_FLOAT(5)))
-
   JS_FUNC(resizePipelineBuffers)
     JS_RETURN_UNDF(h3dResizePipelineBuffers(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2)))
-
   /* JS_FUNC(getRenderTargetData) */
-  
   JS_FUNC(getNodeType)
     JS_RETURN_INT(h3dGetNodeType(JS_ARG_INT(0)))
-
   JS_FUNC(getNodeParent)
     JS_RETURN_INT(h3dGetNodeParent(JS_ARG_INT(0)))
-
   JS_FUNC(setNodeParent)
     JS_RETURN_BOOL(h3dSetNodeParent(JS_ARG_INT(0), JS_ARG_INT(1)))
-
   JS_FUNC(GetNodeChild)
     JS_RETURN_INT(h3dGetNodeChild(JS_ARG_INT(0), JS_ARG_INT(1)))
-
   JS_FUNC(addNodes)
     JS_RETURN_INT(h3dAddNodes(JS_ARG_INT(0), JS_ARG_INT(1)))
-  
   JS_FUNC(removeNodes)
     JS_RETURN_UNDF(h3dRemoveNode(JS_ARG_INT(0)))
-  
   JS_FUNC(checkNodeTransFlag)
     JS_RETURN_BOOL(h3dCheckNodeTransFlag(JS_ARG_INT(0), JS_ARG_BOOL(1)))
-
   /* JS_FUNC(getNodeTransform) */
-
   JS_FUNC(setNodeTransform)
     JS_RETURN_UNDF(h3dSetNodeTransform(JS_ARG_INT(0), JS_ARG_FLOAT(1), JS_ARG_FLOAT(2), JS_ARG_FLOAT(3),
                                                       JS_ARG_FLOAT(4), JS_ARG_FLOAT(5), JS_ARG_FLOAT(6),
@@ -169,88 +123,62 @@ namespace h3d
   /* JS_FUNC(getNodeTransform) */
   /* JS_FUNC(getNodeTransMats)
      JS_FUNC(setNodeTransMats) */
-  
     JS_FUNC(getNodeParamI)
     JS_RETURN_INT(h3dGetNodeParamI(JS_ARG_INT(0), JS_ARG_INT(1)))
-  
   JS_FUNC(setNodeParamI)
     JS_RETURN_UNDF(h3dSetNodeParamI(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2)))
-
   JS_FUNC(getNodeParamF)
     JS_RETURN_FLOAT(h3dGetNodeParamF(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2)))
-  
   JS_FUNC(setNodeParamF)
     JS_RETURN_UNDF(h3dSetNodeParamF(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_FLOAT(3)))
-
   JS_FUNC(getNodeParamStr)
     JS_RETURN_STRING(h3dGetNodeParamStr(JS_ARG_INT(0), JS_ARG_INT(1)))
-
   JS_FUNC(setNodeParamStr)
     JS_RETURN_UNDF(h3dSetNodeParamStr(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_STRING(2)))
-
   JS_FUNC(getNodeFlags)
     JS_RETURN_INT(h3dGetNodeFlags(JS_ARG_INT(0)))
-
   JS_FUNC(setNodeFlags)
     JS_RETURN_UNDF(h3dSetNodeFlags(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_BOOL(2)))
-  
   /* JS_FUNC(getNodeAABB) */
-
   JS_FUNC(findNodes)
     JS_RETURN_INT(h3dFindNodes(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(2)))
-
   JS_FUNC(getNodeFindResult)
     JS_RETURN_INT(h3dGetNodeFindResult(JS_ARG_INT(0)))
-
   JS_FUNC(castRay)
     JS_RETURN_INT(h3dCastRay(JS_ARG_INT(0), JS_ARG_FLOAT(1), JS_ARG_FLOAT(2), JS_ARG_FLOAT(3),
                                             JS_ARG_FLOAT(4), JS_ARG_FLOAT(5), JS_ARG_FLOAT(6),
                                             JS_ARG_INT(7)))
   /* JS_FUNC(getCastRayResults) */ 
- 
   JS_FUNC(checkNodeVisibility)
     JS_RETURN_INT(h3dCheckNodeVisibility(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_BOOL(2), JS_ARG_BOOL(3)))
-  
   JS_FUNC(addGroupNode)
     JS_RETURN_INT(h3dAddGroupNode(JS_ARG_INT(0), JS_ARG_STRING(1)))
-
   JS_FUNC(addModelNode)
     JS_RETURN_INT(h3dAddModelNode(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(2)))
-
   JS_FUNC(setupModelAnimStage)
     JS_RETURN_UNDF(h3dSetupModelAnimStage(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_INT(2), JS_ARG_INT(3), JS_ARG_STRING(4), JS_ARG_BOOL(5)))
-  
   JS_FUNC(setModelAnimParams)
     JS_RETURN_UNDF(h3dSetModelAnimParams(JS_ARG_INT(0), JS_ARG_INT(1), JS_ARG_FLOAT(2), JS_ARG_FLOAT(3)))
-
   JS_FUNC(setModelMorpher)
     JS_RETURN_BOOL(h3dSetModelMorpher(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_FLOAT(2)))
-
   JS_FUNC(addMeshNode)
     JS_RETURN_INT(h3dAddMeshNode(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(2), JS_ARG_INT(3), JS_ARG_INT(4), JS_ARG_INT(5), JS_ARG_INT(6)))
-
   JS_FUNC(addJointNode)
     JS_RETURN_INT(h3dAddJointNode(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(1)))
-  
   JS_FUNC(addLightNode)
     JS_RETURN_INT(h3dAddLightNode(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(2), JS_ARG_STRING(3), JS_ARG_STRING(4)))
-
   JS_FUNC(addCameraNode)
     JS_RETURN_INT(h3dAddCameraNode(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(2)))
-
   JS_FUNC(setupCameraView)
     JS_RETURN_UNDF(h3dSetupCameraView(JS_ARG_INT(0), JS_ARG_FLOAT(1), JS_ARG_FLOAT(2), JS_ARG_FLOAT(3), JS_ARG_FLOAT(4)))
-
   /* JS_FUNC(getCameraProjMat) */
-
   JS_FUNC(addEmitterNode)
     JS_RETURN_INT(h3dAddEmitterNode(JS_ARG_INT(0), JS_ARG_STRING(1), JS_ARG_INT(2), JS_ARG_INT(3), JS_ARG_INT(4), JS_ARG_INT(5)))
-
   JS_FUNC(advanceEmitterTime)
     JS_RETURN_UNDF(h3dAdvanceEmitterTime(JS_ARG_INT(0), JS_ARG_FLOAT(1)))
-
   JS_FUNC(hasEmitterFinished)
     JS_RETURN_BOOL(h3dHasEmitterFinished(JS_ARG_INT(0)))
+
   //Utility functions
   Handle<Value> loadResourcesFromDisk(const Arguments &args)
   {
@@ -266,7 +194,6 @@ namespace h3d
     h3dutDumpMessages();
     return scope.Close(Undefined());
   }
-
 }
 
 namespace globals {
@@ -351,17 +278,16 @@ extern "C" {
     NODE_SET_METHOD(target, "loadResourcesFromDisk", h3d::loadResourcesFromDisk);
     NODE_SET_METHOD(target, "dumpMessages", h3d::dumpMessages);
 
-    #define BEGIN_TYPE(name) { \
+#define BEGIN_TYPE(name) { \
     Local<FunctionTemplate> function_template = FunctionTemplate::New();\
     globals::name = Persistent<FunctionTemplate>::New(function_template); \
     globals::name->InstanceTemplate()->SetInternalFieldCount(1); \
     globals::name->SetClassName(String::New(#name));
-    
-    #define SET_CONST(group, name) \
+
+#define SET_CONST(group, name) \
       globals::group->Set(String::NewSymbol(#name), Integer::New(group::name), \
         static_cast<PropertyAttribute>(v8::ReadOnly | v8::DontDelete));
-
-    #define END_TYPE(name) \
+#define END_TYPE(name) \
       target->Set(String::New(#name), globals::name->GetFunction()); \
     }
 
