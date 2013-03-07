@@ -49,12 +49,18 @@ var setup = function() {
 camera = setup();
 
 var knightScene = horde.addResource(horde.H3DResTypes.SceneGraph, "models/knight/knight.scene.xml", 0);
+var knightAnimRes1 = horde.addResource(horde.H3DResTypes.Animation, "animations/knight_order.anim", 0);
+var knightAnimRes2 = horde.addResource(horde.H3DResTypes.Animation, "animations/knight_attack.anim", 0);
+
 var envRes = horde.addResource(horde.H3DResTypes.SceneGraph, "models/sphere/sphere.scene.xml");
 
 horde.loadResourcesFromDisk("/home/luke/Dropbox/hordejs/Content/");
 
 var knight = horde.addNodes(horde.RootNode, knightScene);
 horde.setNodeTransform(knight, 0, 0, 0, 0, 180, 0, 0.1, 0.1, 0.1);
+horde.setupModelAnimStage(knight, 0, knightAnimRes1, 0, "", false);
+horde.setupModelAnimStage(knight, 1, knightAnimRes2, 0, "", false);
+
 
 var setupLight = function() {
   var light = horde.addLightNode(horde.RootNode, "Light1", 0, "LIGHTING", "SHADOWMAP");
@@ -120,7 +126,6 @@ glfw.events.on('mousemove', function(evt) {
     prev_x = evt.x;
     prev_y = evt.y;
   }
-  console.log(rx, ry);
   ry -= (evt.x - prev_x ) / 100.0 * 30;
   rx -= (evt.y - prev_y ) / 100.0 * 30;
   if (rx > 90) rx = 90;
@@ -130,7 +135,15 @@ glfw.events.on('mousemove', function(evt) {
 });
 
 var pos = glfw.GetMousePos();
+var old_time = Date.now();
+var anim_timer = 0;
+var weight = 1;
+
 do {
+  var dt = Date.now() - old_time;
+  old_time = Date.now();
+  anim_timer += dt;
+
   move_camera();
   horde.render(camera);
   horde.finalizeFrame();
@@ -139,9 +152,8 @@ do {
   glfw.SwapBuffers();
   glfw.GetKey(glfw.KEY_W);
   horde.setNodeTransform(camera, px, py, pz, rx, ry, rz, 1, 1, 1);
-
+  horde.setModelAnimParams(knight, 0, anim_timer * 24/1000, weight);
 } while (!glfw.GetKey(glfw.KEY_ESC) && glfw.GetWindowParam(glfw.OPENED));
 
 glfw.Terminate();
 
-process.exit(0);
