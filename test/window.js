@@ -29,7 +29,7 @@ var setup = function() {
   horde.setOption(horde.H3DOptions.LoadTextures, 1);
 
   var hdrPipe = horde.addResource(horde.H3DResTypes.Pipeline, "pipelines/hdr.pipeline.xml", 0);
-  horde.loadResourcesFromDisk("/home/luke/Dropbox/hordejs/Content/");
+  horde.util.loadResourcesFromDisk("/home/luke/Dropbox/hordejs/Content/");
 
 
   camera = horde.addCameraNode(horde.RootNode, "Camera", hdrPipe);
@@ -54,7 +54,7 @@ var knightAnimRes2 = horde.addResource(horde.H3DResTypes.Animation, "animations/
 
 var envRes = horde.addResource(horde.H3DResTypes.SceneGraph, "models/sphere/sphere.scene.xml");
 
-horde.loadResourcesFromDisk("/home/luke/Dropbox/hordejs/Content/");
+horde.util.loadResourcesFromDisk("/home/luke/Dropbox/hordejs/Content/");
 
 var knight = horde.addNodes(horde.RootNode, knightScene);
 horde.setNodeTransform(knight, 0, 0, 0, 0, 180, 0, 0.1, 0.1, 0.1);
@@ -148,12 +148,13 @@ do {
   horde.render(camera);
   horde.finalizeFrame();
   horde.clearOverlays();
-  horde.dumpMessages();
+  horde.util.dumpMessages();
   glfw.SwapBuffers();
   glfw.GetKey(glfw.KEY_W);
   horde.setNodeTransform(camera, px, py, pz, rx, ry, rz, 1, 1, 1);
   horde.setModelAnimParams(knight, 0, anim_timer * 24/1000, weight);
+  horde.setModelAnimParams(knight, 1, anim_timer * 24/1000, weight);
+
 } while (!glfw.GetKey(glfw.KEY_ESC) && glfw.GetWindowParam(glfw.OPENED));
 
 glfw.Terminate();
-

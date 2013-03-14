@@ -1,30 +1,8 @@
 #include <Horde3D.h>
-#include <Horde3DUtils.h>
 #include <node.h>
+#include "common.h"
 
 using namespace v8;
-#define JS_FUNC(name) Handle<Value> name(const Arguments &args) \
-{\
-  HandleScope scope;
-
-#define JS_RETURN_BOOL(expr) return scope.Close(Boolean::New(expr)); }
-
-#define JS_RETURN_INT(expr) return scope.Close(Integer::New(static_cast<int>(expr))); }
-
-#define JS_RETURN_STRING(expr) return scope.Close(String::New(expr)); }
-
-#define JS_RETURN_FLOAT(expr) return scope.Close(Number::New(expr)); }
-
-#define JS_RETURN_UNDF(expr) expr;\
-  return scope.Close(Undefined()); }
-
-#define JS_ARG_INT(indx) args[indx]->Int32Value()
-
-#define JS_ARG_FLOAT(indx) args[indx]->NumberValue()
-
-#define JS_ARG_BOOL(indx) args[indx]->Int32Value()
-
-#define JS_ARG_STRING(indx) *String::AsciiValue((args[indx]->ToString()))
 
 namespace h3d
 {
@@ -178,22 +156,6 @@ namespace h3d
     JS_RETURN_UNDF(h3dAdvanceEmitterTime(JS_ARG_INT(0), JS_ARG_FLOAT(1)))
   JS_FUNC(hasEmitterFinished)
     JS_RETURN_BOOL(h3dHasEmitterFinished(JS_ARG_INT(0)))
-
-  //Utility functions
-  Handle<Value> loadResourcesFromDisk(const Arguments &args)
-  {
-    HandleScope scope;
-    String::AsciiValue str(args[0]->ToString());
-    h3dutLoadResourcesFromDisk(*str);
-    return scope.Close(Undefined());
-  }
-
-  Handle<Value> dumpMessages(const Arguments &args)
-  {
-    HandleScope scope;
-    h3dutDumpMessages();
-    return scope.Close(Undefined());
-  }
 }
 
 namespace globals {
@@ -273,10 +235,6 @@ extern "C" {
     NODE_SET_METHOD(target, "addEmitterNode", h3d::addEmitterNode);
     NODE_SET_METHOD(target, "advanceEmitterTime", h3d::advanceEmitterTime);
     NODE_SET_METHOD(target, "hasEmitterFinished", h3d::hasEmitterFinished);
-
-    //utility functions
-    NODE_SET_METHOD(target, "loadResourcesFromDisk", h3d::loadResourcesFromDisk);
-    NODE_SET_METHOD(target, "dumpMessages", h3d::dumpMessages);
 
 #define BEGIN_TYPE(name) { \
     Local<FunctionTemplate> function_template = FunctionTemplate::New();\
